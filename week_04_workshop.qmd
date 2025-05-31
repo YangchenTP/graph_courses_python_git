@@ -1,0 +1,43 @@
+---
+title: "India TB Pathways Analysis"
+format: 
+    html:
+        embed-resources: true
+execute:
+    echo: false
+author: "Yangchen Tshering Penjor"
+---
+
+# India TB pathway dataset
+
+*The India TB Pathways dataset is based on a study conducted in Vellore district, Tamil Nadu, India. It examines the pre-diagnostic costs and health-seeking behavior of 880 new adult pulmonary tuberculosis patients registered at Primary Health Centres (PHCs).*
+
+```{python}
+import pandas as pd
+India_data = pd.read_csv('data/india_tb_pathways_and_costs/india_tb_pathways_and_costs.csv')
+from itables import show
+show(India_data.head())
+```
+
+![Map of Tamil Nadu. Vellore district is in the north-east.](intro_to_quarto/images/tndistrict_1.png)
+
+# Distrubution of Employment by Sex
+
+```{python}
+import plotly.express as px
+tamil = px.histogram(India_data, x = 'Sex' , color = 'Employment')
+tamil
+```
+
+The plot reveals that there are more males employed in Tamil Nadu as compared to females. The distrbution of employed females and unemployed females is almost the same, however, the count of employed males is more than 5 times the count of unemployed males. The dataset itself contains more number of male than female.
+
+```{python}
+import pandas as pd
+inline_demo = pd.read_csv('data/india_tb_pathways_and_costs/india_tb_pathways_and_costs.csv')
+max_age = int(India_data.Age.max())
+common_age = int(India_data.Age.mode()[0])
+```
+
+The max age was `{python} max_age`.
+
+The most common age in the dataset was `{python} common_age`.

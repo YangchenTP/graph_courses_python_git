@@ -1,0 +1,179 @@
+
+# Subsetting Columns
+
+# Imports
+
+```{python}
+import pandas as pd
+```
+
+# Dataset
+
+```{python}
+yao = pd.read_csv("data/yaounde_data.csv")
+yao
+```
+
+## Selecting columns with square brackets
+
+```{python}
+yao[["age", "sex"]] # use double square brackets
+```
+
+```{python}
+# this code does not work since it has only 1 square bracket
+# yao["age", "sex"] 
+```
+
+```{python}
+yao["age"] # to select a single column, you can use singe square bracket but that is going to extract the data such that it is no more a dataframe
+```
+
+```{python}
+yao[["age"]] # this returns the data as a dataframe
+```
+
+## Storing data subsets
+
+```{python}
+yao[["age", "sex"]] # this does not modify the dataframe yao, just displays as per command
+```
+
+If we wanted to modify the DataFrame, create a new DataFrame that is a subset. Example:
+```{python}
+yao_subset = yao[["age", "sex"]] 
+yao_subset
+```
+
+Over writing the subset DataFrame generated in the previous code cell:
+```{python}
+yao_subset = yao_subset[["age"]]
+yao_subset
+```
+
+## Practice Q: Select columns with []
+
+Use the [] operators to select the weight_kg and height_cm variables in the yao dataframe. Assign the result to a new dataframe called yao_weight_height.
+
+
+```{python}
+yao_weight_height = yao[["weight_kg", "height_cm"]]
+yao_weight_height 
+```
+
+ ## Excluding columns with drop()
+
+```{python}
+yao.drop(columns=["age"]) #yao dataframe is not modified here as well
+```
+
+```{python}
+yao.drop(columns=["age","age_category"])
+```
+
+## Practice Q: Drop columns with drop()
+
+From the yao dataframe, remove the columns highest_education and consultation.
+
+Assign the result to a new dataframe yao_no_education_consultation.
+
+Print that new dataframe.
+
+```{python}
+yao_no_education_consultation = yao.drop(columns=["highest_education","consultation"])
+yao_no_education_consultation
+```
+
+## Using filter to select columns by regex
+
+Regex: Regular Expressions
+
+```{python}
+yao.filter(regex="ig") #selecting all columns with "ig" in the name
+```
+
+```{python}
+yao.filter(regex="^ig") #selecting all columns that start with "ig" 
+```
+
+```{python}
+yao.filter(regex="result$") #selecting all columns that ends "result"
+```
+
+Tip: Search for regex cheatsheet to get the symbols or ask chatGPT
+
+## Practice Q: Select columns with regex
+
+Select all the columns in the yao dataframe that start with "is_". Assign the result to a new dataframe called yao_is_columns.
+
+```{python}
+yao_is_columns = yao.filter(regex="is_")
+yao_is_columns
+```
+
+## Change column names with rename
+
+```{python}
+yao.rename(columns={"dictionary":"patient_age", "sex": "patient_sex"})
+```
+
+## Practice Q: Rename columns with rename()
+
+Rename the age_category column in the yao dataframe to age_cat. Assign the result to a new dataframe called yao_age_cat.
+
+```{python}
+yao_age_cat = yao.rename(columns={"age_category": "age_cat"})
+yao_age_cat
+```
+
+##  Cleaning messy column names
+
+```{python}
+test_df = pd.DataFrame(
+    {"good_name": range(3),
+    "bad name": range(3),
+    "bad*@name*2": range(3)}
+)
+test_df
+```
+
+```{python}
+test_df.good_name 
+# you can extract this column
+# good names are accesible through dot syntax
+```
+
+```{python}
+# test_df. bad name
+# you canNOT extract this column due to the space in the name
+# bad names are NOT accesible through dot syntax
+```
+
+```{python}
+test_df.columns.str.replace(r"[^a-zA-Z0-9]","_", regex=True) 
+# this means grab me everything that is NOT a big letter, a small letter, or a number, and replace with "_"
+```
+
+```{python}
+test_df.cloumns = test_df.columns.str.replace(r"[^a-zA-Z0-9]","_", regex=True) 
+```
+
+```{python}
+test_df
+```
+
+## Practice Q: Clean column names with regex
+
+Consider the dataframe defined below. Use the str.replace method to clean the column names.
+
+```{python}
+cleaning_practice = pd.DataFrame(
+    {"Aloha": range(3), "Dell Chart": range(3), "Animals@the zoo": range(3)}
+)
+```
+
+```{python}
+cleaning_practice.columns = cleaning_practice.columns.str.replace(r"[^a-zA-Z0-9]","_", regex=True) 
+cleaning_practice
+```
+ 
