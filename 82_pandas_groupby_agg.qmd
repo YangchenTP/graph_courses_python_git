@@ -157,7 +157,7 @@ how agg handles missing values
     .agg(weight_mean=("weight_kg", "mean"),
         count=("weight_kg","size"))
 )
-# now this shows a new category fo people who did not answer the is_smoker question
+# now this shows a new category of people who did not answer the is_smoker question
 ```
 
 ## Practice Q: Mean weight by preganancy status

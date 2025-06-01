@@ -1,0 +1,83 @@
+---
+title: "Gapminder practice 1"
+format: dashboard
+---
+
+```{python}
+import plotly.express as px
+p = px.line(y=[1, 2, 3])
+```
+
+# Practice 1
+
+## Row {height="30%"}
+
+### 
+
+```{python}
+p
+```
+
+### 
+
+```{python}
+p
+```
+
+### 
+
+```{python}
+p
+```
+
+## Row {height="70%"}
+
+### Column {width="70%"}
+
+```{python}
+p
+```
+
+### 
+
+```{python}
+p
+```
+
+# Practice 2
+
+## Row {height="20%"}
+
+### Column
+
+```{python}
+p
+```
+
+### Column
+
+```{python}
+p
+```
+
+## Row {height="80%"}
+
+### Column {width="70%"}
+
+```{python}
+p
+```
+
+### Column {.tabset}
+
+#### Tab 1
+
+```{python}
+p
+```
+
+#### Tab 2
+
+```{python}
+p
+```
